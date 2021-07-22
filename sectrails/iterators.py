@@ -29,11 +29,11 @@ class PageIterator(APIIterator):
     def _get_page(self):
         params = copy(self._params)
         params['page'] = self.num_pages + 1
-        resp = self._api.request(self._method,
-                                 self._path,
-                                 json=self._payload,
-                                 params=params
-                                 ).json()
+        resp = self._api._req(self._method,
+                              self._path,
+                              json=self._payload,
+                              params=params
+                              ).json()
         self.total = resp['record_count']
         self.page = resp['records']
         self.page_count += 1
